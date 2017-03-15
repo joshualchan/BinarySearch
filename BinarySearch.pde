@@ -22,18 +22,53 @@ private Item[] store = {new Item(184,14),
 };                             
 public int linearSearch(int catNumToFind)
 {
-    //complete this method
+    for(int i = 0 ; i<store.length ; i++)
+    {
+        if(store[i].getCatNum() == catNumToFind)
+            return store[i].getInventory();
+    }
     return -1;
 }
 public int binarySearch(int catNumToFind)
 {
-    //complete this method    
-    return -1;    
+
+  int high = store.length-1;
+  int low = 0;
+  while(low<=high)
+  {
+    int guess = (high+low)/2;
+  if(store[guess].getCatNum()>catNumToFind)
+  {
+    high = guess-1;
+    
+  }
+  else if(store[guess].getCatNum()<catNumToFind)
+  {
+    low = guess+1;
+  }    
+  
+  else 
+  return guess;
+  }
+
+  return -1;
+
+
+
+
 }
 public int binarySearch(int catNumToFind,int nLow, int nHigh)
 {
-    //complete this method    
-    return -1;           
+  int guess = (nHigh+nLow)/2;
+  if(nLow>nHigh)
+    return -1;
+
+    if(store[guess].getCatNum()>catNumToFind)
+      return binarySearch(catNumToFind,nLow,guess-1);
+    else if(store[guess].getCatNum()<catNumToFind)
+      return binarySearch(catNumToFind,guess+1,nHigh);
+    else
+      return catNumToFind;    
 }
 public void setup()
 {
@@ -63,6 +98,7 @@ public void setup()
     System.out.println();
     System.out.println("Testing Recursive Binary Search");
     System.out.println("===============================");
+   
     for (int i = 0; i < tests.length; i++)
     {
 
@@ -71,6 +107,7 @@ public void setup()
         else
             System.out.println("Catalog #"+tests[i]+" not found");
     }
+    
 
 }
 
